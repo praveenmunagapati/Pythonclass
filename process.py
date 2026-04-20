@@ -36,14 +36,12 @@
     Example
     """
 import multiprocessing
-
 def task():
-    print("Process running")
-
-p = multiprocessing.Process(target=task)
-
-p.start()
-p.join()
+    print("Process running the id is ",os.getpid())
+if __name__ == '__main__':
+    p = multiprocessing.Process(target=task)
+    p.start()
+    p.join()
 # Output
 # Process running
 
@@ -52,14 +50,13 @@ p.join()
 import multiprocessing
 def task(name):
     print("Running process:", name)
-
-p1 = multiprocessing.Process(target=task, args=("Process1",))
-p2 = multiprocessing.Process(target=task, args=("Process2",))
-
-p1.start()
-p2.start()
-p1.join()
-p2.join()
+if __name__ == '__main__':
+    p1 = multiprocessing.Process(target=task, args=("Process1",))
+    p2 = multiprocessing.Process(target=task, args=("Process2",))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
 # Possible Output
 # Running process: Process1
 # Running process: Process2
@@ -72,14 +69,16 @@ import multiprocessing
 def square(num):
     print(num * num)
 
-numbers = [1,2,3,4]
-processes = []
-for n in numbers:
-    p = multiprocessing.Process(target=square, args=(n,))
-    processes.append(p)
-    p.start()
-for p in processes:
-    p.join()
+if __name__ == '__main__':
+    numbers = [1,2,3,4]
+    processes = []
+    for n in numbers:
+        p = multiprocessing.Process(target=square, args=(n,))
+        processes.append(p)
+        p.start()
+    for p in processes:
+        p.join()
+
 # Output
 # 1
 # 4
@@ -94,9 +93,10 @@ import multiprocessing
 import os
 def show_pid():
     print("Process ID:", os.getpid())
-p = multiprocessing.Process(target=show_pid)
-p.start()
-p.join()
+if __name__ == '__main__':
+    p = multiprocessing.Process(target=show_pid)
+    p.start()
+    p.join()
 
 # Output Example
 # Process ID: 5432
@@ -113,11 +113,12 @@ import multiprocessing
 
 def worker(q):
     q.put("Hello from process")
-q = multiprocessing.Queue()
-p = multiprocessing.Process(target=worker, args=(q,))
-p.start()
-p.join()
-print(q.get())
+if __name__ == '__main__':
+    q = multiprocessing.Queue()
+    p = multiprocessing.Process(target=worker, args=(q,))
+    p.start()
+    p.join()
+    print(q.get())
 
 # Output
 # Hello from process

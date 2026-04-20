@@ -37,10 +37,9 @@
 import threading
 def display():
     print("Thread is running")
-
 t = threading.Thread(target=display)
-
 t.start()
+
 # Output
 # Thread is running
 
